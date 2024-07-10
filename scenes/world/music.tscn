@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7udga2kre7d1"]
+
+[ext_resource type="AudioStream" uid="uid://sxflcamlwrws" path="res://assets/music/looperman-l-0000003-0000078-serialchiller-chilla-stutter-fx-2.wav" id="1_ps5xy"]
+
+[node name="Music" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_ps5xy")
+autoplay = true
+bus = &"Music"

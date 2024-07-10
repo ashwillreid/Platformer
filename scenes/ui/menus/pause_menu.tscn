@@ -1,0 +1,97 @@
+[gd_scene load_steps=4 format=3 uid="uid://cn0cbpa8ksxig"]
+
+[ext_resource type="FontFile" uid="uid://bryt2argemd3j" path="res://assets/fonts/PixelOperator8.ttf" id="1_f2w38"]
+[ext_resource type="Script" path="res://scripts/UI/pause_menu.gd" id="2_qcgei"]
+
+[sub_resource type="Theme" id="Theme_3yo1m"]
+default_font = ExtResource("1_f2w38")
+default_font_size = 16
+Button/constants/h_separation = 10
+Button/fonts/font = ExtResource("1_f2w38")
+
+[node name="PauseMenu" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_qcgei")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+custom_minimum_size = Vector2(420, 230)
+anchors_preset = -1
+anchor_left = -0.062
+anchor_top = 0.049
+anchor_right = 1.0
+anchor_bottom = 1.106
+offset_left = 77.04
+offset_top = -124.92
+offset_right = 2944.0
+offset_bottom = 2236.52
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.410738, 0.343135)
+color = Color(0.811765, 0.341176, 0.294118, 0.603922)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("1_f2w38")
+theme_override_font_sizes/font_size = 32
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="ContinueGameButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/ButtonsVBox"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_neighbor_top = NodePath("../QuitGameButton")
+focus_neighbor_bottom = NodePath("../QuitGameButton")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+theme = SubResource("Theme_3yo1m")
+theme_override_font_sizes/font_size = 16
+text = "CONTINUE
+"
+
+[node name="QuitGameButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/ButtonsVBox"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_neighbor_top = NodePath("../ContinueGameButton")
+focus_neighbor_bottom = NodePath("../ContinueGameButton")
+focus_next = NodePath("../ContinueGameButton")
+focus_previous = NodePath("../ContinueGameButton")
+theme = SubResource("Theme_3yo1m")
+theme_override_font_sizes/font_size = 16
+text = "QUIT"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/ButtonsVBox/ContinueGameButton" to="." method="_on_continue_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/ButtonsVBox/QuitGameButton" to="." method="_on_quit_game_button_pressed"]

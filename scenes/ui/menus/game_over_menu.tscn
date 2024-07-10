@@ -1,0 +1,103 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0hd1dyrj4ede"]
+
+[ext_resource type="Script" path="res://scripts/UI/game_over_menu.gd" id="1_210at"]
+[ext_resource type="FontFile" uid="uid://bryt2argemd3j" path="res://assets/fonts/PixelOperator8.ttf" id="2_metex"]
+
+[sub_resource type="Theme" id="Theme_3yo1m"]
+default_font = ExtResource("2_metex")
+default_font_size = 16
+Button/constants/h_separation = 10
+Button/fonts/font = ExtResource("2_metex")
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -191.0
+offset_top = -106.0
+offset_right = -958.0
+offset_bottom = -538.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.14687, 1.92792)
+script = ExtResource("1_210at")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+custom_minimum_size = Vector2(420, 230)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -106.0
+offset_right = 2365.0
+offset_bottom = 1769.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.471062, 0.422612)
+color = Color(0.811765, 0.341176, 0.294118, 0.603922)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_metex")
+theme_override_font_sizes/font_size = 32
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="ContinueGameButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/ButtonsVBox"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_neighbor_top = NodePath("../QuitGameButton")
+focus_neighbor_bottom = NodePath("../QuitGameButton")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+theme = SubResource("Theme_3yo1m")
+theme_override_font_sizes/font_size = 16
+text = "CONTINUE
+"
+
+[node name="QuitGameButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/ButtonsVBox"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_neighbor_top = NodePath("../ContinueGameButton")
+focus_neighbor_bottom = NodePath("../ContinueGameButton")
+focus_next = NodePath("../ContinueGameButton")
+focus_previous = NodePath("../ContinueGameButton")
+theme = SubResource("Theme_3yo1m")
+theme_override_font_sizes/font_size = 16
+text = "QUIT"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/ButtonsVBox/ContinueGameButton" to="." method="_on_continue_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/ButtonsVBox/QuitGameButton" to="." method="_on_quit_game_button_pressed"]

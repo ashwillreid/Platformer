@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0qgxtlj0830k"]
+
+[ext_resource type="AudioStream" uid="uid://bmxpsljyl1kef" path="res://assets/music/looperman-l-1300801-0097182-ricardomineiro-deep-reggae-guitar.mp3" id="1_k6lku"]
+
+[node name="WorldMusic" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_k6lku")
+autoplay = true
+bus = &"Music"
