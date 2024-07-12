@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwfymi81t52t2"
-path="res://.godot/imported/shoot FX.png-91bc7e2b1a8363a6b485176780393e0c.ctex"
+uid="uid://b5cri6vucklle"
+path="res://.godot/imported/All_Fire_Bullet_Pixel_16x16_03.png-97454740fe82dfbe876c00b58b3da174.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Bot Wheel/Bot Wheel/shoot FX.png"
-dest_files=["res://.godot/imported/shoot FX.png-91bc7e2b1a8363a6b485176780393e0c.ctex"]
+source_file="res://assets/sprites/All_Fire_Bullet_Pixel_16x16_03.png"
+dest_files=["res://.godot/imported/All_Fire_Bullet_Pixel_16x16_03.png-97454740fe82dfbe876c00b58b3da174.ctex"]
 
 [params]
 

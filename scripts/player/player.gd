@@ -1,16 +1,17 @@
 extends CharacterBody2D
 
+const BULLET = preload("res://scenes/player/bullet.tscn")
+
 @onready var timer = $Timer
 @onready var collision_shape_2d = $CollisionShape2D
-
 @onready var floor_detector = $FloorDetector
 @onready var game_manager = get_node("/root/Game/GameManager")
 @onready var health = game_manager.health
 @onready var camera_2d = $Camera2D
 @onready var pause_menu = $MarginContainer/PauseMenu
 @onready var game_over = $MarginContainer/GameOver
-#@onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var animated_sprite_2d = $AnimatedSprite2D
+@onready var muzzle = $AnimatedSprite2D/muzzle
 
 const JUMP_VELOCITY = -300.0
 var speed = 130.0
@@ -20,11 +21,15 @@ var isShooting = false
 var isDead = false
 var inIframe = false
 var damageFrames = 10
-
+var direction : int
+var heldFrameCounter: float = 0.0
+var isHeldEnough: bool = false
+var canCharge : bool = true
 
 signal damageTaken
 signal pause
 signal playerDied
+signal playerDidShoot
 
 func killCallback():
 	velocity.y = JUMP_VELOCITY * .8
@@ -59,12 +64,35 @@ func _on_timer_timeout():
 	playerDied.emit()
 
 func _on_animated_sprite_2d_animation_finished():
-	isShooting = false
-	# TODO HANDLE SHOOT HEREERRE
+	if isShooting:
+		var shootDirection : int
+		if animated_sprite_2d.flip_h:
+			shootDirection = -1
+		else:
+			shootDirection = 1
+		if isHeldEnough == false:
+			heldFrameCounter = 0
+			if is_on_floor():
+				animated_sprite_2d.play("shoot")
+				print('little bang')
+		if isHeldEnough == true:
+			isHeldEnough = false
+			heldFrameCounter = 0.0
+			animated_sprite_2d.play("shoot")
+			print('big bang')
+		isShooting = false
+		playerDidShoot.emit(BULLET, muzzle.global_position, shootDirection)
 
+func handleAttack(delta):
+	if Input.is_action_pressed("attack"):
+		isShooting = true
+		animated_sprite_2d.play("charge")
+		heldFrameCounter += delta
+	if heldFrameCounter > 1:
+		isHeldEnough = true
 
-func handleMovement():
-	var direction = Input.get_axis("Left", "Right")
+func handleInputs(delta):
+	direction = Input.get_axis("Left", "Right")
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump"):
 		if is_on_floor():
@@ -72,13 +100,15 @@ func handleMovement():
 		if !is_on_floor() && canJump:
 			canJump = false
 			velocity.y = JUMP_VELOCITY * .8 
-	
-	#Handle Roll
-	if Input.is_action_just_pressed("attack"):
-		if is_on_floor():
-			isShooting = true
-	
+			
+	handleAttack(delta)
 	return direction
+
+func changeDirection(direction):
+	if direction < 0:
+			animated_sprite_2d.flip_h = true	
+	elif direction > 0:
+			animated_sprite_2d.flip_h = false
 	
 func _physics_process(delta):
 	if !inIframe:
@@ -92,24 +122,22 @@ func _physics_process(delta):
 		
 		#HANDLE MOVEMENT
 		# Get the input direction and handle the movement/deceleration.
-		var direction = handleMovement()
+		var direction = handleInputs(delta)
 			
-		# Handle sprite flipping
-		if direction < 0:
-			animated_sprite_2d.flip_h = true
-		elif direction > 0:
-			animated_sprite_2d.flip_h = false	
+		changeDirection(direction)
 		
 		#Handle Animations
 		if is_on_floor():
-			if isShooting:
-				animated_sprite_2d.play("shoot")
-			elif direction:
-				animated_sprite_2d.play("move")
-			else:
-				animated_sprite_2d.play("idle")
+			if !isShooting:
+				if direction:
+					if direction != direction:
+						print('changed directions')
+					animated_sprite_2d.play("move")
+				else:
+					animated_sprite_2d.play("idle")
 		else:
-			animated_sprite_2d.play("jump")
+			if !isShooting:
+				animated_sprite_2d.play("jump")
 		# Apply velocity
 		if isShooting:
 			velocity.x = direction * speed / 2
@@ -117,7 +145,6 @@ func _physics_process(delta):
 			velocity.x = direction * speed
 		
 		if Input.is_action_just_pressed("Pause"):
-			print('pressing pause!')
 			pause.emit()
 			get_tree().paused = true
 	else:

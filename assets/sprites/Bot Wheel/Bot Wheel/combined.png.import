@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baok1683qotwl"
-path="res://.godot/imported/death.png-43a95ca44ffe2cd944bd437333d687fa.ctex"
+uid="uid://dd8h1b5v5yk5c"
+path="res://.godot/imported/combined.png-3e85f97e09d3708cec6f9627eeafdc3f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Bot Wheel/Bot Wheel/death.png"
-dest_files=["res://.godot/imported/death.png-43a95ca44ffe2cd944bd437333d687fa.ctex"]
+source_file="res://assets/sprites/Bot Wheel/Bot Wheel/combined.png"
+dest_files=["res://.godot/imported/combined.png-3e85f97e09d3708cec6f9627eeafdc3f.ctex"]
 
 [params]
 

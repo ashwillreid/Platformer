@@ -126,7 +126,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pwndd")
 }],
-"loop": false,
+"loop": true,
 "name": &"charge",
 "speed": 5.0
 }, {
@@ -231,8 +231,10 @@ script = ExtResource("1_wjdnk")
 position = Vector2(6.46235e-27, -17)
 scale = Vector2(1.54487, 1.30769)
 sprite_frames = SubResource("SpriteFrames_rn2ib")
-animation = &"charge"
+animation = &"shoot"
 autoplay = "idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="muzzle" type="Node2D" parent="AnimatedSprite2D"]
 position = Vector2(16.1826, 0)

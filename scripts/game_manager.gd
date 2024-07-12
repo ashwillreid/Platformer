@@ -7,8 +7,6 @@ const LEVEL_1 = preload("res://scenes/levels/level_1.tscn")
 const LEVEL_2 = preload("res://scenes/levels/level_2.tscn")
 const PAUSE_MENU = preload("res://scenes/ui/menus/pause_menu.tscn")
 const GAME_OVER_MENU = preload("res://scenes/ui/menus/game_over_menu.tscn")
-#@onready var pause_menu = $"../PauseMenu"
-#@onready var game_over = $"../GameOver"
 
 #exported scene vars
 @export_range (1, 2) var starting_level: int #TODO: MAKE THIS DYNAMICALLY INCREASE AS WE ADD LEVELS
@@ -30,12 +28,20 @@ func _ready():
 		var mainMenu = MAIN_MENU.instantiate()
 		add_child(mainMenu)
 		mainMenu.connect('start_game', handle_start_game)
-	
+
+func _on_player_shot(bullet_scene, muzzle_position, direction):
+	var bullet = bullet_scene.instantiate()
+	if direction == -1:
+		muzzle_position.x -= 50
+	bullet.global_position = muzzle_position
+	bullet.setDirection(Vector2(direction, 0))
+	add_child(bullet)
+	pass
+
 func handle_pickup_coin():
 	score += 1
 	
 func handle_damage():
-	print('we in there')
 	health -= 1
 
 func load_level():
@@ -89,3 +95,4 @@ func connect_player(level: Node):
 			player.connect("damageTaken", handle_damage)
 			player.connect("playerDied", handle_death)
 			player.connect("pause", handle_pause)
+			player.playerDidShoot.connect(_on_player_shot)

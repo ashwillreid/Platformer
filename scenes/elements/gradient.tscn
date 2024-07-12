@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0r5fk8nk5yf2"]
+
+[sub_resource type="Gradient" id="Gradient_qqm12"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_keivu"]
+gradient = SubResource("Gradient_qqm12")
+fill_from = Vector2(0.555556, 0.042735)
+fill_to = Vector2(0.57265, 1)
+
+[node name="Gradient" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-7.62939e-06, 3.8147e-06)
+scale = Vector2(7.53581, 4.80393)
+texture = SubResource("GradientTexture2D_keivu")
