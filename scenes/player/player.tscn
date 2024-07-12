@@ -235,7 +235,7 @@ animation = &"charge"
 autoplay = "idle"
 
 [node name="muzzle" type="Node2D" parent="AnimatedSprite2D"]
-position = Vector2(16.1826, 0)
+position = Vector2(18.7718, -3.82354)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

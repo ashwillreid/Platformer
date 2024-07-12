@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 const BULLET = preload("res://scenes/player/bullet.tscn")
 
@@ -21,7 +21,6 @@ var isShooting = false
 var isDead = false
 var inIframe = false
 var damageFrames = 10
-var direction : int
 var heldFrameCounter: float = 0.0
 var isHeldEnough: bool = false
 var canCharge : bool = true
@@ -30,23 +29,17 @@ signal damageTaken
 signal pause
 signal playerDied
 signal playerDidShoot
-
-func killCallback():
-	velocity.y = JUMP_VELOCITY * .8
-	
 func handleDamage(amount: int, incomingPosition: Vector2):
 	damageTaken.emit()
-	health -= 1
+	health -= amount
 	if health <= 0:
 		handleDeath()
 	var diff = incomingPosition.x - position.x
 	inIframe = true
 	if ( diff >= 305 && diff < 315 ):
-		print('right side')
 		velocity.y = JUMP_VELOCITY * .8
 		velocity.x = JUMP_VELOCITY * -.5
 	else:
-		print('left side')
 		velocity.y = JUMP_VELOCITY * .8
 		velocity.x = JUMP_VELOCITY * .5
 
@@ -74,12 +67,10 @@ func _on_animated_sprite_2d_animation_finished():
 			heldFrameCounter = 0
 			if is_on_floor():
 				animated_sprite_2d.play("shoot")
-				print('little bang')
 		if isHeldEnough == true:
 			isHeldEnough = false
 			heldFrameCounter = 0.0
 			animated_sprite_2d.play("shoot")
-			print('big bang')
 		isShooting = false
 		playerDidShoot.emit(BULLET, muzzle.global_position, shootDirection)
 
@@ -92,7 +83,7 @@ func handleAttack(delta):
 		isHeldEnough = true
 
 func handleInputs(delta):
-	direction = Input.get_axis("Left", "Right")
+	var direction = Input.get_axis("Left", "Right")
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump"):
 		if is_on_floor():
@@ -126,7 +117,7 @@ func _physics_process(delta):
 			
 		changeDirection(direction)
 		
-		#Handle Animations
+		# Handle Animations
 		if is_on_floor():
 			if !isShooting:
 				if direction:

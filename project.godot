@@ -20,7 +20,7 @@ buses/default_bus_layout="res://scenes/world/default_bus_layout.tres"
 
 [autoload]
 
-WorldMusic="*res://scenes/world/world_music.tscn"
+WorldMusic="res://scenes/world/world_music.tscn"
 
 [display]
 

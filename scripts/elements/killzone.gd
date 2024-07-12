@@ -4,4 +4,5 @@ extends Area2D
 @onready var timer = $Timer
 
 func _on_body_entered(body):
-	body.handleDamage(1, global_position)
+	if body is Player:
+		body.handleDamage(1, global_position)
