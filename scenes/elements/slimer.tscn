@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/elements/slimer.gd" id="1_6rodp"]
 [ext_resource type="Texture2D" uid="uid://cjdsam30cxphk" path="res://assets/sprites/slime_green.png" id="1_rb1ks"]
 [ext_resource type="PackedScene" uid="uid://c0ekmk4lqrtuk" path="res://scenes/elements/killzone.tscn" id="2_npib5"]
+[ext_resource type="PackedScene" uid="uid://x8ibgnfkuww6" path="res://scenes/elements/bullet_detector.tscn" id="4_2ropo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a1w3e"]
 atlas = ExtResource("1_rb1ks")
@@ -102,13 +103,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8nay"]
-size = Vector2(12, 13)
+size = Vector2(12, 15)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7vnp"]
-size = Vector2(8, 15)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_goihv"]
-size = Vector2(20, 33)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ikxd"]
+size = Vector2(20, 15)
 
 [node name="Slimer" type="CharacterBody2D"]
 editor_description = "Enemy"
@@ -143,25 +141,19 @@ target_position = Vector2(0, -6)
 collision_mask = 2
 
 [node name="Killzone" parent="." instance=ExtResource("2_npib5")]
-position = Vector2(16, -14)
+position = Vector2(72, -18)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
-position = Vector2(-14, 17.5)
+position = Vector2(-70, 20.5)
 shape = SubResource("RectangleShape2D_b8nay")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 2.5)
-shape = SubResource("RectangleShape2D_a7vnp")
+[node name="BulletDetector" parent="." instance=ExtResource("4_2ropo")]
+collision_layer = 1
 
-[node name="bulletDetector" type="Area2D" parent="."]
-position = Vector2(27, -7)
-collision_layer = 4
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bulletDetector"]
-position = Vector2(-25, 0.5)
-shape = SubResource("RectangleShape2D_goihv")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDetector"]
+position = Vector2(-25, 9.5)
+shape = SubResource("RectangleShape2D_4ikxd")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="body_entered" from="bulletDetector" to="." method="_on_bullet_detector_body_entered"]
+[connection signal="body_entered" from="BulletDetector" to="." method="_on_bullet_detector_body_entered"]

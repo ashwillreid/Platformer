@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://c550k5lsn2rss"]
+[gd_scene load_steps=33 format=3 uid="uid://c550k5lsn2rss"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wjdnk"]
 [ext_resource type="Texture2D" uid="uid://dd8h1b5v5yk5c" path="res://assets/sprites/Bot Wheel/Bot Wheel/combined.png" id="2_lrqgv"]
+[ext_resource type="Script" path="res://scenes/player/player_fsm.gd" id="3_s4jek"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xafl2"]
 atlas = ExtResource("2_lrqgv")
@@ -255,6 +256,9 @@ limit_smoothed = true
 [node name="FloorDetector" type="RayCast2D" parent="."]
 visible = false
 target_position = Vector2(0, 4)
+
+[node name="PlayerFSM" type="Node" parent="."]
+script = ExtResource("3_s4jek")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

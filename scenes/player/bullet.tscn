@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://b5cri6vucklle" path="res://assets/sprites/All_Fire_Bullet_Pixel_16x16_03.png" id="1_2f0x3"]
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_mejka"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_q5i8p"]
+radius = 3.16228
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_c2gel"]
 atlas = ExtResource("1_2f0x3")
 region = Rect2(0, 288, 16, 16)
@@ -46,26 +49,22 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_q5i8p"]
-radius = 3.16228
-
 [node name="Bullet" type="Node2D"]
 script = ExtResource("1_mejka")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-collision_layer = 2
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -1)
-sprite_frames = SubResource("SpriteFrames_mxjt5")
-autoplay = "default"
-frame_progress = 0.610883
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(4, 0)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CircleShape2D_q5i8p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_mxjt5")
+autoplay = "default"
+frame_progress = 0.610883
+
+[node name="RayCast2D" type="RayCast2D" parent="CharacterBody2D"]
+target_position = Vector2(4, 0)
+collision_mask = 4
+collide_with_areas = true
