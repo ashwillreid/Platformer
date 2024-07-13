@@ -1,3 +1,4 @@
 # Godot 4+ specific ignores
 .godot/
 Godot_v4.3-beta3_linux.x86_64
+addons/godot-git-plugin/win64/~libgit_plugin.windows.editor.x86_64.dll
