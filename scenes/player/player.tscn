@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wjdnk"]
 [ext_resource type="Texture2D" uid="uid://dd8h1b5v5yk5c" path="res://assets/sprites/Bot Wheel/Bot Wheel/combined.png" id="2_lrqgv"]
-[ext_resource type="Script" path="res://scenes/player/player_fsm.gd" id="3_s4jek"]
+[ext_resource type="Script" path="res://scripts/player_fsm.gd" id="3_s4jek"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xafl2"]
 atlas = ExtResource("2_lrqgv")

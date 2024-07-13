@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bipybgpjwlpv6" path="res://assets/sprites/parallax-demon-woods-close-trees.png" id="2_gqppt"]
 [ext_resource type="Texture2D" uid="uid://basjs60k8j5lw" path="res://assets/sprites/world_tileset.png" id="3_86ua5"]
 [ext_resource type="Texture2D" uid="uid://f42a0u4wbcb6" path="res://assets/sprites/parallax-demon-woods-far-trees.png" id="3_m36jd"]
-[ext_resource type="PackedScene" path="res://scenes/elements/gradient.tscn" id="3_n8lbt"]
+[ext_resource type="PackedScene" uid="uid://c0r5fk8nk5yf2" path="res://scenes/elements/gradient.tscn" id="3_n8lbt"]
 [ext_resource type="PackedScene" uid="uid://byl60bvvlde7w" path="res://scenes/elements/spawn_point.tscn" id="3_oin4h"]
 [ext_resource type="Texture2D" uid="uid://7ieia0od736m" path="res://assets/sprites/parallax-demon-woods-mid-trees.png" id="4_vls5i"]
 [ext_resource type="PackedScene" uid="uid://c0ekmk4lqrtuk" path="res://scenes/elements/killzone.tscn" id="5_t6mb8"]
